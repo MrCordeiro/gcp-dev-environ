@@ -2,7 +2,7 @@
 
 Why go bankrupt just to get a decent development environment? You don't need to pay for the latest MacBook Pro to get the RAM and CPU needed to run a TensorFlow model. All you need is an internet connection and an GCP account.
 
-This is a guide to setting up a development environment on GCP. GCP offers free computing resources for an year, and about $5/month after that.
+This is a guide to setting up a development environment on GCP. GCP offers free computing resources up to 300$ for the first year.
 
 This will deploy an GCP Compute instance with an Ubuntu AMI and Docker ready to go.
 
@@ -15,15 +15,16 @@ This will deploy an GCP Compute instance with an Ubuntu AMI and Docker ready to 
 5. We'll be installing a simple Ubuntu image. If you want to change that image, use `gcloud compute images list` to get a list of available images.
 6. Set the local environment variables by copying `example.tfvars` to a `terraform.tfvars` file.
 7. Generate an SSH keypair with the `ssh-keygen -t ed25519 -f ~/.ssh/id_gcp_dev_environ` command for Linux or `ssh-keygen -t ed25519 -f "$env:USERPROFILE\.ssh\id_gcp_dev_environ"` . We will be calling it `id_gcp_dev_environ`.
-8. Deploy your GCP Dev environment with the following commands:
+8. Set your secrets in the `terraform.tfvars` file. Use the `example.tfvars` file as a template.
+9. Deploy your GCP Dev environment with the following commands:
    1. `terraform init`
    2. `terraform plan`
    3. `terraform apply`
-9. SSH into your newly created instance:
-   1. Get the public ID address: `terraform output`
-   2. SSH into the instance: `ssh -i "$env:USERPROFILE\.ssh\id_gcp_dev_environ" ubuntu@<public_ip>`
+10. SSH into your newly created instance:
+    1. Get the public ID address: `terraform output`
+    2. SSH into the instance: `ssh -i "$env:USERPROFILE\.ssh\id_gcp_dev_environ" ubuntu@<public_ip>`
 
-We've also added a local provisioner to the infrastructure configuration. If it runs correctly, you should be able to connect to the instance by installing the "Remote-SSH" plugin and then selecting the "Connect to Host" option.
+I've also added a local provisioner to the infrastructure configuration. If it runs correctly, you should be able to connect to the instance by installing the "Remote-SSH" plugin and then selecting the "Connect to Host" option.
 
 ## Terraform commands
 
